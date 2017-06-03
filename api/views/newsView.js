@@ -8,16 +8,21 @@ exports.get_home_news_feed = function(req, res) {
       if(err) { 
            return console.dir(err);
       }
-      if(req.params.id)
+      
+      var products = db.collection("products");
+      if(req.params.id){
         if(ObjectId.isValid(req.params.id))
-          searchParam._id = new ObjectId(req.params.id);
+           searchParam._id = new ObjectId(req.params.id);
         else
-          return res.send("Invalid Id");
-      var products = db.collection("products")
-      products.find(searchParam).toArray(function(err,results){
+           return res.send("Invalid Id");
+        products.findOne(searchParam,function(err,doc){
+          res.send(doc);
+        });
+      }else{
+        products.find(searchParam).toArray(function(err,results){
         res.send(results);
       });
-      
+      }
   };
   db(callBack);
 };

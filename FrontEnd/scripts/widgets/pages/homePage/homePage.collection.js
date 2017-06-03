@@ -6,16 +6,11 @@ define([
 		Config
 ){
 	var HomeView = Backbone.Model.extend({
-		defaults:{
-			newsTitle:"",
-			newsCategory:"",
-			newsContent:"",
-
-		}
+		
 	});
 
 
-	var HomeCollection = Backbone.Collection.extend({
+	var HomeCollection = Backbone.Collection.extend({ 	
 		model:HomeView,
 		url:Config.API_URL_V1()+"/news/home",
 		getNewsFeed:function(){
