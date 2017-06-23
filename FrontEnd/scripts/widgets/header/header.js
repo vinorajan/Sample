@@ -6,7 +6,8 @@ define([
 		Template
 ){
 	var HeaderView = Backbone.View.extend({
-		className:"header-container",
+		tagName:"nav",
+		className:"navbar navbar-default",
 		template:_.template(Template),
 		events:{
 			

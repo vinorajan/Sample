@@ -1,0 +1,26 @@
+.dashboard{
+	.row{
+		  display: flex;
+    	  flex-wrap: wrap;
+		.news-feed{
+			box-sizing: border-box;
+			padding: 5px 5px 5px 5px;
+			width:25%;
+			.read-more{
+				text-align: right;
+			}
+			.news-item {
+			    height: 100px;
+			    background-color: red;
+			    margin: 10px 0px 10px 0px;
+			    overflow: hidden;
+			    box-shadow: 7px 7px 5px;
+			    border-radius: 4px;
+			    transition: box-shadow 0.1s;
+			    &:hover{
+			    	 box-shadow: 5px 5px;
+			    };
+			}
+		}
+	}
+}
