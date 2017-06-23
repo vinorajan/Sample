@@ -15,7 +15,7 @@ define([
         initialize: function(newsId) {
             this.newsDetailModel = new NewsDetailModel({ id: newsId.id });
             this.newsDetailModel.getNewsDetail();
-            //this.listenTo(this.newsDetailModel,"success",this.renderNewsDetail.bind(this))
+            this.listenTo(this.newsDetailModel, "success", this.renderNewsDetail.bind(this))
         },
         render: function() {
             var loader = _.template(LoaderTpl);
