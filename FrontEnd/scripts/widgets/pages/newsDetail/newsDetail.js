@@ -5,7 +5,7 @@ define([
 ],function(
 		Backbone,
 		Template,
-		NewsDetail
+		NewsDetailModel
 ){
 	var NewsDetailView = Backbone.View.extend({
 		className:"news-detail",
@@ -14,13 +14,15 @@ define([
 			
 		},
 		initialize:function(newsId){
-			this.newsDetail = new NewsDetail({id:newsId.id});
-			this.newsDetail.getNewsDetail();
-			this.listenTo(this.newsDetail,"success",this.render.bind(this))
+			this.newsDetailModel = new NewsDetailModel({id:newsId.id});
+			this.newsDetailModel.getNewsDetail();
+			this.listenTo(this.newsDetailModel,"success",this.renderNewsDetail.bind(this))
 		},
 		render:function(){
-			this.$el.html(this.template());
 			return this;
+		},
+		renderNewsDetail:function(){
+			this.$el.html(this.template(this.newsDetailModel.toJSON()));
 		}
 	});
 
