@@ -1,15 +1,12 @@
 define([
 	'Backbone',
-	'text!widgets/pages/homePage/newsFeed/newsFeed.html'
-	
+	'text!widgets/common/newsFeed/newsFeed.html'
 ],function(
 		Backbone,
 		Template
-		
 ){
-
 	var NewsFeed = Backbone.View.extend({
-		className:"news-item",
+		className:"news-feed",
 		template:_.template(Template),
 		initialize:function(){
 		
