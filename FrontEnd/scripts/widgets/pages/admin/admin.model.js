@@ -11,10 +11,18 @@ define([
             title: "",
             content: "",
             location: "",
-            date: "",
             verifiedBy: "",
+            file: ""
         },
-        urlRoot: Config.API_URL_V1() + "/news"
+        urlRoot: Config.API_URL_V1() + "/news",
+        createImage: function(file) {
+            var self = this;
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                self.set("file", event.target.result)
+            };
+            reader.readAsDataURL(file);
+        }
     });
 
     return new AdminModel;

@@ -1,16 +1,19 @@
 define([
     'Backbone',
     'text!widgets/pages/admin/admin.html',
-    'widgets/pages/admin/admin.model'
+    'widgets/pages/admin/admin.model',
+    'widgets/common/buttonLoader/buttonLoader'
 ], function(
     Backbone,
     Template,
-    AdminModel
+    AdminModel,
+    ButtonLoader
 ) {
     var AdminView = Backbone.View.extend({
         className: "admin-container",
         events: {
-            "click .add-news-button": "saveNews"
+            "click .add-news-button": "saveNews",
+            "change #image": "addFile"
         },
         model: AdminModel,
         template: _.template(Template),
@@ -19,6 +22,7 @@ define([
         },
         render: function() {
             this.$el.html(this.template());
+            this.$(".add-news-button").append(ButtonLoader.el);
             return this
         },
         clearForm: function() {
@@ -26,6 +30,10 @@ define([
             this.$('#type').val("");
             this.$('#title').val("");
             this.$('#location').val("");
+            this.$('#image').val("");
+        },
+        addFile: function(e) {
+            this.model.createImage(e.target.files[0])
         },
         saveNews: function() {
             var self = this;
@@ -34,11 +42,12 @@ define([
                 type: this.$('#type').val(),
                 title: this.$('#title').val(),
                 location: this.$('#location').val(),
-                date: new Date().toDateString(),
                 verifiedBy: "Vino"
-            })
+            });
+            ButtonLoader.show();
             this.model.save(null, {
                 success: function() {
+                    ButtonLoader.hide()
                     self.clearForm();
                 },
                 error: function(err) {
