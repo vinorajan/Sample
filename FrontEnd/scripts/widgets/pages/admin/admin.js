@@ -51,6 +51,7 @@ define([
                     self.clearForm();
                 },
                 error: function(err) {
+                    ButtonLoader.hide()
                     console.log(err)
                 }
             });

@@ -5,6 +5,5 @@ var express = require('express'),
 var todoList = require('../views/newsView');
 NewsRouter.get('/home', todoList.get_home_news_feed);
 NewsRouter.get('/:id', todoList.get_home_news_feed);
-NewsRouter.post("/", todoList.save_news_feed)
-
+NewsRouter.post("/", todoList.save_news_feed);
 module.exports = NewsRouter;
