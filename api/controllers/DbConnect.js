@@ -4,9 +4,7 @@ var uri = 'mongodb://127.0.0.1/vinoraj';
 module.exports = function() {
     var options = {
         db: { native_parser: true },
-        server: { poolSize: 5 },
-        user: '',
-        pass: ''
+        server: { poolSize: 5 }
     }
 
     mongoose.connect(uri, options);

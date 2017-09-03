@@ -2,6 +2,7 @@
 // Require Mongo Common method
 var ObjectId = require('mongodb').ObjectId;
 var NewsModel = require("../models/newsModel");
+var AboutModel = require("../models/aboutModel");
 var fs = require('fs');
 
 
@@ -46,4 +47,31 @@ exports.save_news_feed = function(req, res, next) {
             res.json(news)
         }).catch(next)
     }
+};
+
+
+exports.get_about_page = function(req, res) {
+    var searchParam = {}
+    AboutModel.find(searchParam, function(err, news) {
+        res.json(news);
+    })
+
+};
+
+exports.save_about_page = function(req, res, next) {
+    var newModel = new AboutModel(req.body);
+    newModel.save().then(function(news) {
+        res.json(news)
+    }).catch(next)
+};
+
+exports.update_about_page = function(req, res, next) {
+    var query = { _id: req.body._id };
+    AboutModel.update(query, req.body, function(err, doc) {
+        if (err)
+            next();
+        else
+            res.json(doc)
+    });
+
 };
